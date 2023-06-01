@@ -236,7 +236,7 @@ public class MainMenu {
 
         System.out.println("\n1. 주문      2. 메뉴판");
         int checkNumber = sc.nextInt(); // 주문할지 메뉴판으로 돌아갈지 선택.
-        sc.next(); // 개행문자 제거
+        sc.nextLine(); // 개행문자 제거
 
         if (checkNumber == 1) {
             OrderComplete(); // 1.주문을 선택하면 OrderComplete()메서드를 불러와서 주문이 완료되었음을 알리고 대기번호를 부여후 메뉴판으로 돌아감
