@@ -6,7 +6,6 @@ public class Main {
 
         MainMenu mainMenu = new MainMenu(); // MainMenu 클래스를 사용하기위한 mainMenu생성
         mainMenu.showMainMenu(); // mainMenu안에있는 showMainMenu 메서드 실행
-
     }
 }
 
