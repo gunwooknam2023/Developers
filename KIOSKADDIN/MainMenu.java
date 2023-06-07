@@ -20,6 +20,9 @@ public class MainMenu {
     Order order = new Order(); // Order클래스의 메서드를 사용하기위한 변수 order 생성
     Scanner sc = new Scanner(System.in);
 
+    int waitmenu = 0;
+    int completemenu = 0;
+
     // adminMenu adminmenu = new adminMenu();
 
     public MainMenu() { // 각각의 리스트에 이름, 가격, 설명 추가
@@ -285,6 +288,58 @@ public class MainMenu {
 
 
     public void showOrderMenu() { // 주문화면(장바구니)
+
+        if (waitmenu >= 1 && completemenu >= 1) {
+            System.out.println("최근 완료된 주문입니다.\n");
+            if (completemenu > 3) {
+                for(int i=finishedOrders.size()-1; finishedOrders.size()-4<i; i--){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            } else {
+                for(int i=0; i<finishedOrders.size(); i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            }
+            System.out.println();
+
+            System.out.println("대기중인 주문입니다.\n");
+            for(int i=0; i<waitingOrders.size(); i++){
+                FoodMenu wait = waitingOrders.get(i);
+                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            }
+            System.out.println();
+        } else if (waitmenu >= 1 && completemenu < 1) {
+            System.out.println("최근 완료된 주문이 없습니다.\n");
+            System.out.println();
+
+            System.out.println("대기중인 주문입니다.\n");
+            for(int i=0; i<waitingOrders.size(); i++){
+                FoodMenu wait = waitingOrders.get(i);
+                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            }
+            System.out.println();
+        } else if (waitmenu < 1 && completemenu >= 1) {
+            System.out.println("최근 완료된 주문입니다.\n");
+            if (completemenu > 3) {
+                for(int i=0; i<3; i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            } else {
+                for(int i=0; i<finishedOrders.size(); i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            }
+            System.out.println();
+
+            System.out.println("대기중인 주문이 없습니다.\n");
+            System.out.println();
+        }
+
+
         System.out.println("아래와 같이 주문 하시겠습니까?");
         System.out.println();
         System.out.println("[ Orders ]");
@@ -292,8 +347,8 @@ public class MainMenu {
         List<FoodMenu> basket = order.getbasket();
         // FoodMenu 리스트형식 basket을 생성. order안에있는 getbasket()을 통해서 basket안의 값을 리턴받아서 대입.
 
-        for (int i = 0; i < basket.size(); i++) { // 넘겨받은 basket의 길이만큼 반복해서 장바구니안의 메뉴를 출력
-            FoodMenu menu = basket.get(i); // FoodMenu형식의 menu를 만들어서 basket안에 들어있는 0번째 값부터 가져옴
+        // FoodMenu형식의 menu를 만들어서 basket안에 들어있는 0번째 값부터 가져옴
+        for (FoodMenu menu : basket) { // 넘겨받은 basket의 길이만큼 반복해서 장바구니안의 메뉴를 출력
             System.out.println(menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
         }
         System.out.println();
@@ -306,11 +361,11 @@ public class MainMenu {
 
 
         if (checkNumber == 1) {
-            sc.nextLine();
-            for (int i = 0; i < basket.size(); i++) {
-                FoodMenu wait = basket.get(i);
-                waitingOrders.add(wait);
-            }
+        for(int i=0; i<basket.size(); i++){
+            FoodMenu wait = basket.get(i);
+            waitingOrders.add(wait);
+            waitmenu++;
+        }
             OrderComplete(basket); // 1.주문을 선택하면 OrderComplete()메서드를 불러와서 주문이 완료되었음을 알리고 대기번호를 부여후 메뉴판으로 돌아감
         } else if (checkNumber == 2) {
             System.out.println("메뉴판으로 돌아갑니다."); // 2.메뉴판을 선택하면 메뉴판으로 돌아감.
@@ -473,19 +528,19 @@ public class MainMenu {
                 System.out.print("설명을 입력하세요 : ");
                 String drinksDescription = sc.nextLine();
 
-                System.out.println("\n이름 : " + drinksName + "  가격 : " + drinksPrice + "  설명 : " + drinksDescription);
+                System.out.println("\n이름 : "+drinksName+"  가격 : "+drinksPrice+"  설명 : "+drinksDescription);
                 System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
                 System.out.println("1. 확인       2. 취소       ");
                 int dcheckNum = sc.nextInt();
                 sc.nextLine();
 
-                if (dcheckNum == 1) {
+                if(dcheckNum == 1){
                     System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
                     drinksMenu.add(new FoodMenu(drinksName, drinksPrice, drinksDescription));
-                } else if (dcheckNum == 2) {
+                }else if(dcheckNum == 2){
                     System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
                     showMainMenu();
-                } else {
+                }else{
                     System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
                     showMainMenu();
                 }
@@ -502,19 +557,19 @@ public class MainMenu {
                 System.out.print("설명을 입력하세요 : ");
                 String beerDescription = sc.nextLine();
 
-                System.out.println("\n이름 : " + beerName + "  가격 : " + beerPrice + "  설명 : " + beerDescription);
+                System.out.println("\n이름 : "+beerName+"  가격 : "+beerPrice+"  설명 : "+beerDescription);
                 System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
                 System.out.println("1. 확인       2. 취소       ");
                 int beercheckNum = sc.nextInt();
                 sc.nextLine();
 
-                if (beercheckNum == 1) {
+                if(beercheckNum == 1){
                     System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
                     beerMenu.add(new FoodMenu(beerName, beerPrice, beerDescription));
-                } else if (beercheckNum == 2) {
+                }else if(beercheckNum == 2){
                     System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
                     showMainMenu();
-                } else {
+                }else{
                     System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
                     showMainMenu();
                 }
@@ -742,11 +797,6 @@ public class MainMenu {
             }
         }
 
-//        for(int i=0; i<waitingOrders.size(); i++){
-//            FoodMenu wait = waitingOrders.get(i);
-//            System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
-//        }
-
         System.out.print("\n수행할 기능을 입력하세요 (1. 주문완료처리       2. 주문거절) : ");
         int check = sc.nextInt();
         sc.nextLine();
@@ -780,88 +830,6 @@ public class MainMenu {
             }
 
         }
-
-//        if(check == 1){ // 주문완료처리부분
-//            System.out.print("완료처리할 상품이름을 입력해주세요. : ");
-//            String name = sc.nextLine();
-//
-//            boolean nameF = false; // 버거가 존재하는지 확인하기 위한 boolean형 변수
-//            for (int i = 0; i < waitingOrders.size(); i++) {
-//                FoodMenu waits = waitingOrders.get(i);
-//                if (waits.getName().equals(name)) {
-//                    System.out.print(waits.getName() + " 를 주문목록에서 완료처리 하시겠습니까? (1. 확인        2. 취소) : ");
-//                    int ok = sc.nextInt();
-//                    sc.nextLine();
-//                    if (ok == 1) {
-//                        finishedOrders.add(waits); // 완료처리한 상품을 finishedOrders로 이동.
-//                        waitingOrders.remove(i);
-//                        nameF = true;
-//                        break;
-//
-//                    } else if (ok == 2) {
-//                        System.out.println("완료처리를 취소합니다.");
-//                        System.out.println("메뉴판으로 이동합니다.\n");
-//                        showMainMenu();
-//                    }
-//
-//                }
-//            }
-//
-//            if (nameF == true) { // 상품 완료 처리시
-//                System.out.println(name + " 메뉴가 완료처리되었습니다.");
-//                System.out.println("메뉴판으로 돌아갑니다.\n");
-//                showMainMenu();
-//
-//            } else if (nameF == false) { // 상품이름이 존재하지 않을때
-//                System.out.println("존재하지 않는 상품이름을 입력하였습니다.");
-//                System.out.println("메뉴판으로 돌아갑니다.\n");
-//                showMainMenu();
-//            }
-//
-//
-//
-//        }else if(check == 2){ // 거절처리부분
-//            System.out.print("거절처리할 상품이름을 입력해주세요 : ");
-//            String name2 = sc.nextLine();
-//
-//            boolean nameF2 = false;
-//            for (int i = 0; i < waitingOrders.size(); i++) {
-//                FoodMenu waits2 = waitingOrders.get(i);
-//                if (waits2.getName().equals(name2)) {
-//                    System.out.print(waits2.getName() + " 를 주문목록에서 거절처리를 하시겠습니까? (1. 확인        2. 취소) : ");
-//                    int ok2 = sc.nextInt();
-//                    sc.nextLine();
-//                    if (ok2 == 1) {
-//                        waitingOrders.remove(i);
-//                        nameF2 = true;
-//                        break;
-//
-//                    } else if (ok2 == 2) {
-//                        System.out.println("거절처리를 취소합니다.");
-//                        System.out.println("메뉴판으로 이동합니다.\n");
-//                        showMainMenu();
-//                    }
-//
-//                }
-//            }
-//
-//            if (nameF2 == true) { // 상품 완료 처리시
-//                System.out.println(name2 + " 메뉴가 취소처리되었습니다.");
-//                System.out.println("메뉴판으로 돌아갑니다.\n");
-//                showMainMenu();
-//
-//            } else if (nameF2 == false) { // 상품이름이 존재하지 않을때
-//                System.out.println("존재하지 않는 상품이름을 입력하였습니다.");
-//                System.out.println("메뉴판으로 돌아갑니다.\n");
-//                showMainMenu();
-//            }
-//            System.out.println("주문을 거절합니다. 주문리스트에서 삭제됩니다.");
-//        }
-
-//        for (int i = 0; i < waitingOrders.size(); i++) {
-//            FoodMenu wait = waitingOrders.get(i);
-//            System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
-//        }
 
 
     }
@@ -922,4 +890,8 @@ public class MainMenu {
         }
 
     }
+
+
+
 }
+
