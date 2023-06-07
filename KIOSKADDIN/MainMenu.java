@@ -17,6 +17,9 @@ public class MainMenu {
     Order order = new Order(); // Order클래스의 메서드를 사용하기위한 변수 order 생성
     Scanner sc = new Scanner(System.in);
 
+    int waitmenu = 0;
+    int completemenu = 0;
+
     // adminMenu adminmenu = new adminMenu();
 
     public MainMenu() { // 각각의 리스트에 이름, 가격, 설명 추가
@@ -281,6 +284,58 @@ public class MainMenu {
 
 
     public void showOrderMenu() { // 주문화면(장바구니)
+
+        if (waitmenu >= 1 && completemenu >= 1) {
+            System.out.println("최근 완료된 주문입니다.\n");
+            if (completemenu > 3) {
+                for(int i=0; i<3; i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            } else {
+                for(int i=0; i<finishedOrders.size(); i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            }
+            System.out.println();
+
+            System.out.println("대기중인 주문입니다.\n");
+            for(int i=0; i<waitingOrders.size(); i++){
+                FoodMenu wait = waitingOrders.get(i);
+                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            }
+            System.out.println();
+        } else if (waitmenu >= 1 && completemenu < 1) {
+            System.out.println("최근 완료된 주문이 없습니다.\n");
+            System.out.println();
+
+            System.out.println("대기중인 주문입니다.\n");
+            for(int i=0; i<waitingOrders.size(); i++){
+                FoodMenu wait = waitingOrders.get(i);
+                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            }
+            System.out.println();
+        } else if (waitmenu < 1 && completemenu >= 1) {
+            System.out.println("최근 완료된 주문입니다.\n");
+            if (completemenu > 3) {
+                for(int i=0; i<3; i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            } else {
+                for(int i=0; i<finishedOrders.size(); i++){
+                    FoodMenu finished = finishedOrders.get(i);
+                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                }
+            }
+            System.out.println();
+
+            System.out.println("대기중인 주문이 없습니다.\n");
+            System.out.println();
+        }
+
+
         System.out.println("아래와 같이 주문 하시겠습니까?");
         System.out.println();
         System.out.println("[ Orders ]");
@@ -306,8 +361,9 @@ public class MainMenu {
         for(int i=0; i<basket.size(); i++){
             FoodMenu wait = basket.get(i);
             waitingOrders.add(wait);
+            waitmenu++;
         }
-            OrderComplete(); // 1.주문을 선택하면 OrderComplete()메서드를 불러와서 주문이 완료되었음을 알리고 대기번호를 부여후 메뉴판으로 돌아감
+        OrderComplete(); // 1.주문을 선택하면 OrderComplete()메서드를 불러와서 주문이 완료되었음을 알리고 대기번호를 부여후 메뉴판으로 돌아감
         } else if (checkNumber == 2) {
             System.out.println("메뉴판으로 돌아갑니다."); // 2.메뉴판을 선택하면 메뉴판으로 돌아감.
             showMainMenu();
@@ -736,6 +792,8 @@ public class MainMenu {
             if (nameF == true) { // 상품 완료 처리시
                 System.out.println(name + " 메뉴가 완료처리되었습니다.");
                 System.out.println("메뉴판으로 돌아갑니다.\n");
+                completemenu++;
+                waitmenu--;
                 showMainMenu();
 
             } else if (nameF == false) { // 상품이름이 존재하지 않을때
@@ -774,6 +832,7 @@ public class MainMenu {
             if (nameF2 == true) { // 상품 완료 처리시
                 System.out.println(name2 + " 메뉴가 취소처리되었습니다.");
                 System.out.println("메뉴판으로 돌아갑니다.\n");
+                waitmenu--;
                 showMainMenu();
 
             } else if (nameF2 == false) { // 상품이름이 존재하지 않을때
