@@ -288,7 +288,7 @@ public class MainMenu {
         if (waitmenu >= 1 && completemenu >= 1) {
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
-                for(int i=0; i<3; i++){
+                for(int i=finishedOrders.size()-1; finishedOrders.size()-4<i; i--){
                     FoodMenu finished = finishedOrders.get(i);
                     System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
                 }
