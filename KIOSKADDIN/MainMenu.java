@@ -858,10 +858,10 @@ public class MainMenu {
 //            System.out.println("주문을 거절합니다. 주문리스트에서 삭제됩니다.");
 //        }
 
-        for (int i = 0; i < waitingOrders.size(); i++) {
-            FoodMenu wait = waitingOrders.get(i);
-            System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
-        }
+//        for (int i = 0; i < waitingOrders.size(); i++) {
+//            FoodMenu wait = waitingOrders.get(i);
+//            System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+//        }
 
 
     }
