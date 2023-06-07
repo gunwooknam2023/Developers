@@ -1,5 +1,6 @@
 package KIOSK;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -317,7 +318,35 @@ public class MainMenu {
             if (checkNumber == 1) {
                 System.out.println("주문 시 요청사항을 입력하시겠습니까?");
                 System.out.println("\n1. 네      2. 아니요");
-                orderMemo();
+                int checkRequest = sc.nextInt();
+                sc.nextLine();
+
+                if (checkRequest == 1) {
+                    System.out.println("요청사항을 입력해주세요 (최대 20자):");
+                    String getRequest = sc.nextLine();
+
+                    if(getRequest.isEmpty()){
+                        while(true) {
+                            System.out.println("요청사항을 입력해주세요.");
+                            addMemoAgain();
+                            break;
+                        }
+                    } else if (getRequest.length() <= 20){
+                        System.out.println("요청사항이 정상적으로 전달되었습니다. 감사합니다.");
+                        order.setRequest(getRequest); // 지역변수로 사용
+                    } else {
+                        System.out.println("죄송합니다. 총 20글자 내외로 작성해주시기 바랍니다.");
+                        addMemoAgain();
+                    }
+                } else {
+                    System.out.println("주문이 완료되었습니다.");
+                    for (int i = 0; i < basket.size(); i++) {
+                        FoodMenu wait = basket.get(i);
+                        waitingOrders.add(wait);
+                    }
+                    orderComplete(basket);
+                }
+
                 for (int i = 0; i < basket.size(); i++) {
                     FoodMenu wait = basket.get(i);
                     waitingOrders.add(wait);
@@ -330,38 +359,65 @@ public class MainMenu {
         }
     }
 
-    // 조혜연 추가작성(0607) -- request 받는 메소드
     public void orderMemo() {
-        int checkRequest = sc.nextInt();
-        sc.nextLine();
 
-        if (checkRequest == 1) {
-            System.out.println("요청사항을 입력해주세요 (최대 20자):");
-            String getRequest = sc.nextLine();
-            if (getRequest.isEmpty()) {
-                System.out.println("요청사항을 입력해주세요.");
-                orderMemo();
-            } else if (getRequest.length() <= 20) {
-                System.out.println("요청사항이 정상적으로 전달되었습니다. 감사합니다.");
-                order.setRequest(order.getRequest());
-            } else {
-                System.out.println("총 20자 이내로 작성해주시기 부탁드립니다.");
-                orderMemo();
-            }
-        }
+
+
     }
 
-//    // 손민지 추가작성(0607) - 요청사항 입력받기
-//    public String getRequest(){
-//        sc.nextLine();
-//        System.out.println("요청사항을 입력하세요.(20자 이내)");
-//        String request = sc.nextLine();
-//        if(request.length()>20){
-//            System.out.println("요청사항은 총 20자로 제한됩니다.");
-//            getRequest();
+    public void addMemoAgain(){
+        String getRequest = sc.nextLine();
+        order.setRequest(getRequest);
+    }
+
+//    // 조혜연 추가작성(0607) -- request 받는 메소드
+//    public void orderMemo() {
+//        while (checkRequest == 1) {
+//            System.out.println("요청사항을 입력해주세요 (최대 20자):");
+//            String getRequest = sc.nextLine();
+//
+//            while (getRequest.length() <= 20) {
+//                if (getRequest.isEmpty()) {
+//                    System.out.println("요청사항을 입력해주세요.");
+//                    orderMemo();
+//                } else if (getRequest.length() > 20) {
+//                    System.out.println("총 20자 이내로 작성해주시기 부탁드립니다.");
+//                    orderMemo();
+//                    break;
+//                } else {
+//                    System.out.println("요청사항이 정상적으로 전달되었습니다. 감사합니다.");
+//                    order.setRequest(getRequest); // 지역변수로 사용)
+//                }
+//            }  break;
 //        }
-//        return request;
 //    }
+
+
+//
+//        if (checkRequest == 1) {
+//            System.out.println("요청사항을 입력해주세요 (최대 20자):");
+//            String getRequest = sc.nextLine();
+//
+//            if (getRequest.isEmpty()) {
+//                System.out.println("요청사항을 입력해주세요.");
+//                orderMemo();
+//            } else if (getRequest.length() <= 20) {
+//                System.out.println("요청사항이 정상적으로 전달되었습니다. 감사합니다.");
+//                order.setRequest(getRequest); // 지역변수로 사용
+//            } else {
+//                   while(true) {
+//                    System.out.println("총 20자 이내로 작성해주시기 부탁드립니다.");
+//                    orderMemo();
+//                    if(getRequest.length() <= 20){
+//                        order.setRequest(getRequest);
+//                    }
+//                    break;
+//                }
+//            }
+//        }
+//    }
+
+
 
     // 손민지 추가작성(0607) - 성민님 메모에 있던거 가져왔습니다. 나중에 조건대로 수정하면 될 것 같아요.
     public static String setDate() {
