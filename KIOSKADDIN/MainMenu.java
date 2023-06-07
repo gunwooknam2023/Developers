@@ -89,7 +89,7 @@ public class MainMenu {
                 OrderStatus(); // 주문현황 // 주문현황 메서드 출력
                 break;
             default:
-                System.out.println("1~6번까지의 숫자만 입력가능합니다."); // 1~6번 제외 숫자가 들어왔을때
+                System.out.println("1~7번까지의 숫자만 입력가능합니다."); // 1~7번 제외 숫자가 들어왔을때
                 break;
         }
     }
@@ -279,10 +279,8 @@ public class MainMenu {
             System.out.println("장바구니 추가가 취소되었습니다.");
         } else System.out.println("숫자를 잘못 입력하였습니다.");
 
-
         showMainMenu();
     }
-
 
     public void showOrderMenu() { // 주문화면(장바구니)
         System.out.println("아래와 같이 주문 하시겠습니까?");
@@ -304,8 +302,6 @@ public class MainMenu {
         int checkNumber = sc.nextInt(); // 주문할지 메뉴판으로 돌아갈지 선택.
         sc.nextLine(); // 개행문자 제거
 
-
-
         if (checkNumber == 1) {
         for(int i=0; i<basket.size(); i++){
             FoodMenu wait = basket.get(i);
@@ -316,12 +312,7 @@ public class MainMenu {
             System.out.println("메뉴판으로 돌아갑니다."); // 2.메뉴판을 선택하면 메뉴판으로 돌아감.
             showMainMenu();
         }
-
     }
-
-
-
-
 
     public void OrderComplete() { // 주문완료, 대기번호 부여
         int orderNumber = order.getOrderNumber();
@@ -347,18 +338,30 @@ public class MainMenu {
 
     public void OrderStatus() { //주문현황
         System.out.println();
-        System.out.println("최근에 주문완료된 주문목록");
-        for(int i=0; i<finishedOrders.size(); i++){
-            FoodMenu finished = finishedOrders.get(i);
-            System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());}
+        System.out.println("[ 최근에 주문완료된 목록 ]");
+
+        if (finishedOrders.size()>=4) {
+            System.out.println("4개 이상의 주문이 완료되었습니다.");
+        } else if (finishedOrders.size()==0) {
+            System.out.print("주문완료된 상품이 없습니다.");
+        } else {
+            for(int i=0; i<finishedOrders.size(); i++){
+                FoodMenu finished = finishedOrders.get(i);
+                System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+            }
+        }
         System.out.println();
-
-        System.out.println("대기 중인 주문목록");
-        for (int i = 0; i < waitingOrders.size(); i++) {
-            FoodMenu wait = waitingOrders.get(i);
-            System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());}
+        System.out.println("-------------------------");
+        System.out.println("[ 대기 중인 주문목록 ]");
+        if (waitingOrders.size()==0) {
+            System.out.print("대기 중인 상품이 없습니다.");
+        } else {
+            for (int i=0; i<waitingOrders.size(); i++) {
+                FoodMenu wait = waitingOrders.get(i);
+                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            }
+        } System.out.println(); showMainMenu();
     }
-
 
     public void OrderCancel() { // 주문취소
         System.out.println();
@@ -367,7 +370,6 @@ public class MainMenu {
 
         int cancelNum = sc.nextInt(); // 확인할지 취소할지 번호를 받아옴.
         sc.nextLine(); // 개행문자 제거
-
 
         if (cancelNum == 1) {
             order.Clearbasket(); // 사용자가 1.확인 선택시 order클래스안의 Clearbasket() 메서드를 호출해서 카트를 비워줌
