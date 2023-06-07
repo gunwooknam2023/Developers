@@ -6,7 +6,6 @@ import java.util.List;
 public class Order {
     private List<FoodMenu> basket; // FoodMenu 리스트 형식으로 사용할 basket 생성
     private int orderNumber; // 주문대기번호
-
     private String request; // 요청사항
 //    private String orderedTime; // 주문 시각
 //    private String finishedTime; // 주문 완료 시각

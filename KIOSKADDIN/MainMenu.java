@@ -20,6 +20,8 @@ public class MainMenu {
     // adminMenu adminmenu = new adminMenu();
     Order order = new Order(); // Order클래스의 메서드를 사용하기위한 변수 order 생성
     Scanner sc = new Scanner(System.in);
+    int waitMenu = 0;
+    int completeMenu = 0;
 
     // adminMenu adminmenu = new adminMenu();
 
@@ -294,6 +296,7 @@ public class MainMenu {
             }
             showMainMenu();
         } else {
+            System.out.println();
             System.out.println("아래와 같이 주문 하시겠습니까?");
             System.out.println();
             System.out.println("[ Orders ]");
@@ -327,7 +330,6 @@ public class MainMenu {
             }
         }
     }
-
 
     // 조혜연 추가작성(0607) -- request 받는 메소드
     public void orderMemo() {
