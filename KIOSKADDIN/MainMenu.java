@@ -50,12 +50,13 @@ public class MainMenu {
         System.out.println("4. Beer            | 뉴욕 브루클린 브루어리에서 양조한 맥주");
         System.out.println();
         System.out.println("[ ORDER MENU ]");
-        System.out.println("5. Order           | 장바구니를 확인 후 주문합니다.");
-        System.out.println("6. Cancel          | 진행중인 주문을 취소합니다.");
-        System.out.println("7. Order Status    | 최근 완료된 주문 현황과 대기 현황을 안내합니다.");
+        System.out.println("5. Order        | 장바구니를 확인 후 주문합니다.");
+        System.out.println("6. Cancel       | 진행중인 주문을 취소합니다.");
+        System.out.println("7. Order Status | 최근 완료된 주문 현황과 대기 현황을 안내합니다.");
         System.out.println();
         System.out.println("        관리자 모드(0)");
         System.out.println();
+
         System.out.print("메뉴선택 : ");
         int choice = sc.nextInt();
         sc.nextLine(); // 개행문자 제거
@@ -335,7 +336,7 @@ public class MainMenu {
         showMainMenu(); // 예외상황발생없이 위의 Thread.sleep(3000)이 try되면 메인메뉴로 돌아감.
     }
 
-    public void OrderStatus() { // 주문현황
+    public void OrderStatus() { //주문현황
         System.out.println();
         System.out.println("[ 최근에 주문완료된 목록 ]");
 
