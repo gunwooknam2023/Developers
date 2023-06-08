@@ -1,0 +1,17 @@
++ MainMenu클래스에 case 0 추가(관리자 모드)
++ MainMenu클래스에 adminMode 메서드 추가(관리자 메뉴 선택) 비밀번호 : admin
++ MainMenu클래스의 showOrderMenu()메서드에 1. 주문 선택시 waitingOrder 리스트에 
+ 장바구니 안에담긴 정보 저장
+
+MainMenu클래스 내부 메서드 추가내역
++상품생성 createFood()
++상품삭제 deleteFood()
++대기주문관리 waitMgmt()
++완료주문관리 finishedMgtm()
+
+
+미구현
+- 일괄메뉴 완료처리, 취소처리 미구현
+- 주문번호로 완료처리 미구현
+- 대기목록, 완료목록이 비어있을시 안내문구 미구현
+- 전체적인 간략화 필요(반복되는부분 메서드이용)ㅠ
