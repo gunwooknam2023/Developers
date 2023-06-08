@@ -50,9 +50,9 @@ public class MainMenu {
         System.out.println("4. Beer            | 뉴욕 브루클린 브루어리에서 양조한 맥주");
         System.out.println();
         System.out.println("[ ORDER MENU ]");
-        System.out.println("5. Order         | 장바구니를 확인 후 주문합니다.");
-        System.out.println("6. Cancel        | 진행중인 주문을 취소합니다.");
-        System.out.println("7. Order Status  | 최근 완료된 주문 현황과 대기 현황을 안내합니다.");
+        System.out.println("5. Order           | 장바구니를 확인 후 주문합니다.");
+        System.out.println("6. Cancel          | 진행중인 주문을 취소합니다.");
+        System.out.println("7. Order Status    | 최근 완료된 주문 현황과 대기 현황을 안내합니다.");
         System.out.println();
         System.out.println("        관리자 모드(0)");
         System.out.println();
