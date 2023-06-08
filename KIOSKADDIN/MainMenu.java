@@ -294,10 +294,10 @@ public class MainMenu {
     public void showOrderMenu() { // 주문화면(장바구니)
 
         if (waitmenu >= 1 && completemenu >= 1) {
-            int i = 0;
             System.out.println();
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
+                int i = 0;
                 for(Order o : manageList){
                     if (i < 3) {
                         if(o.finished){
@@ -353,10 +353,10 @@ public class MainMenu {
             }
             System.out.println();
         } else if (waitmenu < 1 && completemenu >= 1) {
-            int j = 0;
             System.out.println();
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
+                int j = 0;
                 for(Order o : manageList){
                     if (j < 3) {
                         if(o.finished){
