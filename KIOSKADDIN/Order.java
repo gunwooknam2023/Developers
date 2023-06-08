@@ -12,6 +12,12 @@ public class Order {
 
     boolean finished = false;
 
+    String request; // 요청사항
+    String orderedTime; // 주문 시각
+    String finishedTime; // 주문 완료 시각
+
+    boolean finished = false;
+
     public Order() {
         basket = new ArrayList<>(); // 장바구니 어레이리스트 생성
         orderNumber = 1; // 초기 주문넘버
@@ -24,6 +30,7 @@ public class Order {
         this.request = request;
 //        this.orderedTime = orderedTime;
     }
+
 
     public List<FoodMenu> getBasket() { // 장바구니 메뉴 리턴
         return basket;
