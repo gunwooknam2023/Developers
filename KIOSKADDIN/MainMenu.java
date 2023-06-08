@@ -283,6 +283,106 @@ public class MainMenu {
     }
 
     public void showOrderMenu() { // 주문화면(장바구니)
+// <<<<<<< 성민님 주문현황 코드
+// =======
+
+//         if (waitmenu >= 1 && completemenu >= 1) {
+//             System.out.println();
+//             System.out.println("최근 완료된 주문입니다.\n");
+//             if (completemenu > 3) {
+//                 int i = 0;
+//                 for(Order o : manageList){
+//                     if (i < 3) {
+//                         if(o.finished){
+//                             System.out.println("=============================================");
+//                             System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+//                             printListData(o.getbasket());
+//                             System.out.println("-- total : W " + o.totalPrice());
+//                             System.out.println("-- 요청사항 : " + o.getRequest());
+//                             System.out.println("-- 완료 일시 : " + o.finishedTime);
+//                             i++;
+//                         }
+//                     }
+//                 }
+//             } else {
+//                 for(Order o : manageList){
+//                     if(o.finished){
+//                         System.out.println("=============================================");
+//                         System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+//                         printListData(o.getbasket());
+//                         System.out.println("-- total : W " + o.totalPrice());
+//                         System.out.println("-- 요청사항 : " + o.getRequest());
+//                         System.out.println("-- 완료 일시 : " + o.finishedTime);
+//                     }
+//                 }
+//             }
+//             System.out.println();
+
+//             System.out.println("대기중인 주문입니다.\n");
+//             for (Order o : manageList) {
+//                 // 완료 x 주문만 골라 출력
+//                 if (!o.finished) {
+//                     System.out.println("=============================================");
+//                     System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+//                     printListData(o.getbasket());
+//                     System.out.println("-- 주문 일시 : " + o.orderedTime);
+//                 }
+//             }
+//             System.out.println();
+//         } else if (waitmenu >= 1 && completemenu < 1) {
+//             System.out.println();
+//             System.out.println("최근 완료된 주문이 없습니다.\n");
+//             System.out.println();
+
+//             System.out.println("대기중인 주문입니다.\n");
+//             for (Order o : manageList) {
+//                 // 완료 x 주문만 골라 출력
+//                 if (!o.finished) {
+//                     System.out.println("=============================================");
+//                     System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+//                     printListData(o.getbasket());
+//                     System.out.println("-- 주문 일시 : " + o.orderedTime);
+//                 }
+//             }
+//             System.out.println();
+//         } else if (waitmenu < 1 && completemenu >= 1) {
+//             System.out.println();
+//             System.out.println("최근 완료된 주문입니다.\n");
+//             if (completemenu > 3) {
+//                 int j = 0;
+//                 for(Order o : manageList){
+//                     if (j < 3) {
+//                         if(o.finished){
+//                             System.out.println("=============================================");
+//                             System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+//                             printListData(o.getbasket());
+//                             System.out.println("-- total : W " + o.totalPrice());
+//                             System.out.println("-- 요청사항 : " + o.getRequest());
+//                             System.out.println("-- 완료 일시 : " + o.finishedTime);
+//                             j++;
+//                         }
+//                     }
+//                 }
+//             } else {
+//                 for(Order o : manageList){
+//                     if(o.finished){
+//                         System.out.println("=============================================");
+//                         System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+//                         printListData(o.getbasket());
+//                         System.out.println("-- total : W " + o.totalPrice());
+//                         System.out.println("-- 요청사항 : " + o.getRequest());
+//                         System.out.println("-- 완료 일시 : " + o.finishedTime);
+//                     }
+//                 }
+//             }
+//             System.out.println();
+
+//             System.out.println("대기중인 주문이 없습니다.\n");
+//             System.out.println();
+//         }
+
+
+// >>>>>>> master
         System.out.println("아래와 같이 주문 하시겠습니까?");
         System.out.println();
         System.out.println("[ Orders ]");
