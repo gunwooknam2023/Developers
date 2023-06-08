@@ -102,31 +102,36 @@ public class MainMenu {
 
         if (password.equals("admin")) {
             System.out.println("비밀번호가 확인되었습니다.");
-            System.out.println();
-            System.out.println("1.상품생성      2. 상품삭제      3. 대기주문관리       4. 완료주문관리");
-            System.out.println("사용하실 메뉴를 선택하세요.");
-            int adminNum = sc.nextInt();
-            sc.nextLine();
-            switch (adminNum) {
-                case 1:
-                    createFood(); // 상품생성 메서드
-                    break;
+            while(true){
+                System.out.println();
+                System.out.println("1.상품생성      2. 상품삭제      3. 대기주문관리       4. 완료주문관리      0.메뉴판으로 돌아가기");
+                System.out.println("사용하실 메뉴를 선택하세요.");
+                int adminNum = sc.nextInt();
+                sc.nextLine();
+                switch (adminNum) {
+                    case 1:
+                        createFood(); // 상품생성 메서드
+                        break;
 
-                case 2:
-                    deleteFood(); // 상품삭제 메서드
-                    break;
+                    case 2:
+                        deleteFood(); // 상품삭제 메서드
+                        break;
 
-                case 3:
-                    waitMgmt(); // 대기주문관리 메서드
-                    break;
+                    case 3:
+                        waitMgmt(); // 대기주문관리 메서드
+                        break;
 
-                case 4:
-                    finishedMgtm(); // 완료주문관리 메서드
-                    break;
+                    case 4:
+                        finishedMgtm(); // 완료주문관리 메서드
+                        break;
 
-                default:
-                    System.out.println("1~4번의 숫자만 입력 가능합니다.");
-                    break;
+                    case 0:
+                        showMainMenu();
+
+                    default:
+                        System.out.println("1~4번의 숫자만 입력 가능합니다.");
+                        break;
+                }
             }
 
         } else {
@@ -141,7 +146,6 @@ public class MainMenu {
 
             showMainMenu();
         }
-
 
     }
 
@@ -376,7 +380,6 @@ public class MainMenu {
 
     // 손민지 추가작성(0607) - 요청사항 입력받기
     public String getRequest() {
-        sc.nextLine();
         System.out.println("요청사항을 입력하세요.(20자 이내)");
         String request = sc.nextLine();
         if (request.length() > 20) {
@@ -405,7 +408,8 @@ public class MainMenu {
         int orderNumber = order.getOrderNumber();
         List<FoodMenu> list = new ArrayList<>(basket);
         // 손민지 추가작성(0607) - 관리자가 보는 리스트에 주문 내용 추가
-        manageList.add(new Order(orderNumber, list, getRequest(), setDate()));
+        String request = getRequest();
+        manageList.add(new Order(orderNumber, list, request, setDate()));
 
         // order클래스의 getOrderNumber()을 호출해 order()안에 있는 orderNumber의 숫자를 받아서 orderNumber변수에 초기화
         System.out.println("주문이 완료되었습니다!");
@@ -810,6 +814,8 @@ public class MainMenu {
                     // 주문번호가 orderNum인 주문이 완료 전이라면
                     if (!o.finished) {
                         o.finished = true;
+                        o.finishedTime = setDate();
+                        System.out.println(o.getOrderNumber() + "번 주문을 완료했습니다. \n관리자 화면으로 돌아갑니다.");
                         break;
                     } else {
                         System.out.println("이미 완료된 주문 번호입니다.");
@@ -839,57 +845,90 @@ public class MainMenu {
         System.out.println("완료주문관리를 선택하셨습니다.");
         System.out.println("완료된 주문입니다.\n");
 
-        for (int i = 0; i < finishedOrders.size(); i++) {
-            FoodMenu finished = finishedOrders.get(i);
-            System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+        for(Order o : manageList){
+            if(o.finished){
+                System.out.println("=============================================");
+                System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                printListData(o.getbasket());
+                System.out.println("-- total : W " + o.totalPrice());
+                System.out.println("-- 요청사항 : " + o.getRequest());
+                System.out.println("-- 주문 일시 : " + o.orderedTime);
+                System.out.println("-- 완료 일시 : " + o.finishedTime);
+            }
         }
+//        for (int i = 0; i < finishedOrders.size(); i++) {
+//            FoodMenu finished = finishedOrders.get(i);
+//            System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+//        }
 
-        System.out.print("\n수행할 기능을 입력하세요 (1. 완료처리내역 삭제       2. 메뉴판으로 돌아가기) : ");
+        System.out.print("\n수행할 기능을 입력하세요 (1. 완료처리내역 삭제       2. 관리자 화면으로 돌아가기) : ");
         int check = sc.nextInt();
         sc.nextLine();
 
         if (check == 1) {
-            System.out.print("기록에서 삭제처리할 상품명을 입력하세요 : ");
-            String remove = sc.nextLine();
+            System.out.println("완료 내역에서 삭제 할 주문 번호를 입력해주세요. : ");
+            int orderNum = sc.nextInt();
 
-            boolean name = false; // 상품이 존재하는지 확인하기 위한 boolean형 변수
-            for (int i = 0; i < finishedOrders.size(); i++) {
-                FoodMenu finished = finishedOrders.get(i);
-                if (finished.getName().equals(remove)) {
-                    System.out.print(finished.getName() + " 를 완료기록에서 삭제처리 하시겠습니까? (1. 확인        2. 취소) : ");
-                    int ok = sc.nextInt();
-                    sc.nextLine();
-                    if (ok == 1) {
-                        finishedOrders.remove(i);
-                        name = true;
+            for (Order o : manageList) {
+                if (o.getOrderNumber() == orderNum) {
+                    if (!o.finished) {
+                        manageList.remove(o);
                         break;
-
-                    } else if (ok == 2) {
-                        System.out.println("삭제처리를 취소합니다.");
-                        System.out.println("메뉴판으로 이동합니다.\n");
-                        showMainMenu();
+                    } else {
+                        System.out.println("완료내역에 존재하지 않는 주문 번호입니다.");
+                        break;
                     }
-
                 }
             }
-
-            if (name == true) { // 상품 완료 처리시
-                System.out.println(remove + " 메뉴가 삭제처리되었습니다.");
-                System.out.println("메뉴판으로 돌아갑니다.\n");
-                showMainMenu();
-
-            } else if (name == false) { // 상품이름이 존재하지 않을때
-                System.out.println("존재하지 않는 상품이름을 입력하였습니다.");
-                System.out.println("메뉴판으로 돌아갑니다.\n");
-                showMainMenu();
-            }
-
         } else if (check == 2) {
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
+            System.out.println("관리자 화면으로 돌아갑니다.");
         }
-
+        return;
     }
+
+
+//        if (check == 1) {
+//            System.out.print("기록에서 삭제처리할 상품명을 입력하세요 : ");
+//            String remove = sc.nextLine();
+//
+//            boolean name = false; // 상품이 존재하는지 확인하기 위한 boolean형 변수
+//            for (int i = 0; i < finishedOrders.size(); i++) {
+//                FoodMenu finished = finishedOrders.get(i);
+//                if (finished.getName().equals(remove)) {
+//                    System.out.print(finished.getName() + " 를 완료기록에서 삭제처리 하시겠습니까? (1. 확인        2. 취소) : ");
+//                    int ok = sc.nextInt();
+//                    sc.nextLine();
+//                    if (ok == 1) {
+//                        finishedOrders.remove(i);
+//                        name = true;
+//                        break;
+//
+//                    } else if (ok == 2) {
+//                        System.out.println("삭제처리를 취소합니다.");
+//                        System.out.println("메뉴판으로 이동합니다.\n");
+//                        showMainMenu();
+//                    }
+//
+//                }
+//            }
+//
+//            if (name == true) { // 상품 완료 처리시
+//                System.out.println(remove + " 메뉴가 삭제처리되었습니다.");
+//                System.out.println("메뉴판으로 돌아갑니다.\n");
+//                showMainMenu();
+//
+//            } else if (name == false) { // 상품이름이 존재하지 않을때
+//                System.out.println("존재하지 않는 상품이름을 입력하였습니다.");
+//                System.out.println("메뉴판으로 돌아갑니다.\n");
+//                showMainMenu();
+//            }
+//
+//        } else if (check == 2) {
+//            System.out.println("메뉴판으로 돌아갑니다.\n");
+//            showMainMenu();
+//        }
+//
+//    }
 
 
 
