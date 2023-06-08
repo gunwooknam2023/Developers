@@ -9,14 +9,11 @@ public class Order {
     private String request; // 요청사항
 //    private String orderedTime; // 주문 시각
 //    private String finishedTime; // 주문 완료 시각
-
     boolean finished = false;
-
-    String request; // 요청사항
     String orderedTime; // 주문 시각
     String finishedTime; // 주문 완료 시각
 
-    boolean finished = false;
+//    boolean finished = false;
 
     public Order() {
         basket = new ArrayList<>(); // 장바구니 어레이리스트 생성

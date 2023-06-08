@@ -270,11 +270,15 @@ public class MainMenu {
     }
 
     public void showOrderMenu() { // 주문화면(장바구니)
-        // 최근 주문 건에 대한 알림
-        if (waitmenu >= 1 && completemenu >= 1) {
-            System.out.println("최근 완료된 주문입니다.\n");
-            if (completemenu > 3) {
-                for (int i = finishedOrders.size() - 1; finishedOrders.size() - 4 < i; i--) {
+//         최근 주문 건에 대한 알림
+        // 최근 주문 건에 대해 알리고, 장바구니가 비었다고 알린다
+        // 최근 주문 건에 대해 알리고, 주문하겠냐고 묻는다
+        
+
+        if (waitmenu >= 1 && completemenu >= 1) { // 대기중이거나 완료중인 메뉴가 1보다 크다면
+            System.out.println("최근 완료된 주문입니다.\n"); // 최근 완료된 주문이라고 표시하고
+            if (completemenu > 3) { // 완료된 주문이 3개보다 크다면
+                for (int i = finishedOrders.size() - 1; finishedOrders.size() - 4 < i; i--) { // 완료된 주문건의 개수 - 1,
                     FoodMenu finished = finishedOrders.get(i);
                     System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
                 }
@@ -331,6 +335,7 @@ public class MainMenu {
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
+            showMainMenu();
             // 장바구니에 상품이 있으면 아래 실행
         } else {
             System.out.println();
@@ -401,6 +406,7 @@ public class MainMenu {
     public void addMemoAgain() {
         String getRequest = sc.nextLine();
         order.setRequest(getRequest);
+    }
 
 
         // 손민지 추가작성(0607) - 성민님 메모에 있던거 가져왔습니다. 나중에 조건대로 수정하면 될 것 같아요.
@@ -824,7 +830,7 @@ public class MainMenu {
                 if (!o.finished) {
                     System.out.println("=============================================");
                     System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
-                    printListData(o.getbasket());
+                    printListData(o.getBasket());
                     System.out.println("-- total : W " + o.totalPrice());
                     System.out.println("-- 요청사항 : " + o.getRequest());
                     System.out.println("-- 주문 일시 : " + o.orderedTime);
@@ -928,4 +934,4 @@ public class MainMenu {
         }
 
     }
-}
+
