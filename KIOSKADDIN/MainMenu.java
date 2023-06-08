@@ -294,47 +294,92 @@ public class MainMenu {
     public void showOrderMenu() { // 주문화면(장바구니)
 
         if (waitmenu >= 1 && completemenu >= 1) {
+            int i = 0;
+            System.out.println();
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
-                for(int i=finishedOrders.size()-1; finishedOrders.size()-4<i; i--){
-                    FoodMenu finished = finishedOrders.get(i);
-                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                for(Order o : manageList){
+                    if (i < 3) {
+                        if(o.finished){
+                            System.out.println("=============================================");
+                            System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                            printListData(o.getbasket());
+                            System.out.println("-- total : W " + o.totalPrice());
+                            System.out.println("-- 요청사항 : " + o.getRequest());
+                            System.out.println("-- 완료 일시 : " + o.finishedTime);
+                            i++;
+                        }
+                    }
                 }
             } else {
-                for(int i=0; i<finishedOrders.size(); i++){
-                    FoodMenu finished = finishedOrders.get(i);
-                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                for(Order o : manageList){
+                    if(o.finished){
+                        System.out.println("=============================================");
+                        System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                        printListData(o.getbasket());
+                        System.out.println("-- total : W " + o.totalPrice());
+                        System.out.println("-- 요청사항 : " + o.getRequest());
+                        System.out.println("-- 완료 일시 : " + o.finishedTime);
+                    }
                 }
             }
             System.out.println();
 
             System.out.println("대기중인 주문입니다.\n");
-            for(int i=0; i<waitingOrders.size(); i++){
-                FoodMenu wait = waitingOrders.get(i);
-                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            for (Order o : manageList) {
+                // 완료 x 주문만 골라 출력
+                if (!o.finished) {
+                    System.out.println("=============================================");
+                    System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                    printListData(o.getbasket());
+                    System.out.println("-- 주문 일시 : " + o.orderedTime);
+                }
             }
             System.out.println();
         } else if (waitmenu >= 1 && completemenu < 1) {
+            System.out.println();
             System.out.println("최근 완료된 주문이 없습니다.\n");
             System.out.println();
 
             System.out.println("대기중인 주문입니다.\n");
-            for(int i=0; i<waitingOrders.size(); i++){
-                FoodMenu wait = waitingOrders.get(i);
-                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            for (Order o : manageList) {
+                // 완료 x 주문만 골라 출력
+                if (!o.finished) {
+                    System.out.println("=============================================");
+                    System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                    printListData(o.getbasket());
+                    System.out.println("-- 주문 일시 : " + o.orderedTime);
+                }
             }
             System.out.println();
         } else if (waitmenu < 1 && completemenu >= 1) {
+            int j = 0;
+            System.out.println();
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
-                for(int i=0; i<3; i++){
-                    FoodMenu finished = finishedOrders.get(i);
-                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                for(Order o : manageList){
+                    if (j < 3) {
+                        if(o.finished){
+                            System.out.println("=============================================");
+                            System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                            printListData(o.getbasket());
+                            System.out.println("-- total : W " + o.totalPrice());
+                            System.out.println("-- 요청사항 : " + o.getRequest());
+                            System.out.println("-- 완료 일시 : " + o.finishedTime);
+                            j++;
+                        }
+                    }
                 }
             } else {
-                for(int i=0; i<finishedOrders.size(); i++){
-                    FoodMenu finished = finishedOrders.get(i);
-                    System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+                for(Order o : manageList){
+                    if(o.finished){
+                        System.out.println("=============================================");
+                        System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                        printListData(o.getbasket());
+                        System.out.println("-- total : W " + o.totalPrice());
+                        System.out.println("-- 요청사항 : " + o.getRequest());
+                        System.out.println("-- 완료 일시 : " + o.finishedTime);
+                    }
                 }
             }
             System.out.println();
@@ -368,9 +413,9 @@ public class MainMenu {
         for(int i=0; i<basket.size(); i++){
             FoodMenu wait = basket.get(i);
             waitingOrders.add(wait);
-            waitmenu++;
         }
-            OrderComplete(basket); // 1.주문을 선택하면 OrderComplete()메서드를 불러와서 주문이 완료되었음을 알리고 대기번호를 부여후 메뉴판으로 돌아감
+        waitmenu++;
+        OrderComplete(basket); // 1.주문을 선택하면 OrderComplete()메서드를 불러와서 주문이 완료되었음을 알리고 대기번호를 부여후 메뉴판으로 돌아감
         } else if (checkNumber == 2) {
             System.out.println("메뉴판으로 돌아갑니다."); // 2.메뉴판을 선택하면 메뉴판으로 돌아감.
             showMainMenu();
@@ -823,6 +868,8 @@ public class MainMenu {
                     }
                 }
             }
+            waitmenu--;
+            completemenu++;
         } else if (check == 2) {
             System.out.println("거절할 주문 번호를 입력해주세요. : ");
             int orderNum = sc.nextInt();
@@ -834,7 +881,7 @@ public class MainMenu {
                     break;
                 }
             }
-
+            waitmenu--;
         }
 
 
@@ -880,6 +927,7 @@ public class MainMenu {
                     }
                 }
             }
+            completemenu--;
         } else if (check == 2) {
             System.out.println("관리자 화면으로 돌아갑니다.");
         }
