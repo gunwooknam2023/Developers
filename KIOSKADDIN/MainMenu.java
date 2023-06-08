@@ -809,10 +809,8 @@ public class MainMenu {
             FoodMenu wait = waitingOrders.get(i);
             System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
         }
-
-
     }
-    
+
     public void finishedMgtm(){ // 완료주문관리 메서드
         System.out.println("완료주문관리를 선택하셨습니다.");
         System.out.println("완료된 주문입니다.\n");
