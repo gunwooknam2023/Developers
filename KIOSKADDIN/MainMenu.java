@@ -14,14 +14,12 @@ public class MainMenu {
     List<FoodMenu> finishedOrders = new ArrayList<>(); // 완료된주문을 저장하는 리스트
     List<Order> manageList = new ArrayList<>();    // 주문서 리스트(관리자가 볼 것)
 
-    int waitmenu = 0;
-    int completemenu = 0;
 
     // adminMenu adminmenu = new adminMenu();
     Order order = new Order(); // Order클래스의 메서드를 사용하기위한 변수 order 생성
     Scanner sc = new Scanner(System.in);
-    int waitMenu = 0;
-    int completeMenu = 0;
+    int waitmenu = 0;
+    int completemenu = 0;
 
     public MainMenu() { // 각각의 리스트에 이름, 가격, 설명 추가
         burgersMenu.add(new FoodMenu("ShackBurger", "W 6.9", "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
@@ -276,12 +274,12 @@ public class MainMenu {
         if (waitmenu >= 1 && completemenu >= 1) {
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
-                for(int i=finishedOrders.size()-1; finishedOrders.size()-4<i; i--){
+                for (int i = finishedOrders.size() - 1; finishedOrders.size() - 4 < i; i--) {
                     FoodMenu finished = finishedOrders.get(i);
                     System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
                 }
             } else {
-                for(int i=0; i<finishedOrders.size(); i++){
+                for (int i = 0; i < finishedOrders.size(); i++) {
                     FoodMenu finished = finishedOrders.get(i);
                     System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
                 }
@@ -289,7 +287,7 @@ public class MainMenu {
             System.out.println();
 
             System.out.println("대기중인 주문입니다.\n");
-            for(int i=0; i<waitingOrders.size(); i++){
+            for (int i = 0; i < waitingOrders.size(); i++) {
                 FoodMenu wait = waitingOrders.get(i);
                 System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
             }
@@ -299,7 +297,7 @@ public class MainMenu {
             System.out.println();
 
             System.out.println("대기중인 주문입니다.\n");
-            for(int i=0; i<waitingOrders.size(); i++){
+            for (int i = 0; i < waitingOrders.size(); i++) {
                 FoodMenu wait = waitingOrders.get(i);
                 System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
             }
@@ -307,12 +305,12 @@ public class MainMenu {
         } else if (waitmenu < 1 && completemenu >= 1) {
             System.out.println("최근 완료된 주문입니다.\n");
             if (completemenu > 3) {
-                for(int i=0; i<3; i++){
+                for (int i = 0; i < 3; i++) {
                     FoodMenu finished = finishedOrders.get(i);
                     System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
                 }
             } else {
-                for(int i=0; i<finishedOrders.size(); i++){
+                for (int i = 0; i < finishedOrders.size(); i++) {
                     FoodMenu finished = finishedOrders.get(i);
                     System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
                 }
@@ -334,7 +332,7 @@ public class MainMenu {
                 System.out.println(e.getMessage());
             }
             // 장바구니에 상품이 있으면 아래 실행
-            } else {
+        } else {
             System.out.println();
             System.out.println("아래와 같이 주문 하시겠습니까?");
             System.out.println();
@@ -365,13 +363,13 @@ public class MainMenu {
                     System.out.println("요청사항을 입력해주세요 (최대 20자):");
                     String getRequest = sc.nextLine();
 
-                    if(getRequest.isEmpty()){
-                        while(true) {
+                    if (getRequest.isEmpty()) {
+                        while (true) {
                             System.out.println("요청사항을 입력해주세요.");
                             addMemoAgain();
                             break;
                         }
-                    } else if (getRequest.length() <= 20){
+                    } else if (getRequest.length() <= 20) {
                         System.out.println("요청사항이 정상적으로 전달되었습니다. 감사합니다.");
                         order.setRequest(getRequest); // 지역변수로 사용
                     } else {
@@ -400,510 +398,279 @@ public class MainMenu {
     }
 
     // 조혜연 추가작성(0607) -- 요청사항을 오기입하는 경우, 재입력을 위한 메소드
-    public void addMemoAgain(){
+    public void addMemoAgain() {
         String getRequest = sc.nextLine();
         order.setRequest(getRequest);
 
 
-    // 손민지 추가작성(0607) - 성민님 메모에 있던거 가져왔습니다. 나중에 조건대로 수정하면 될 것 같아요.
-    public static String setDate() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd h:mm:ss");
-        return dateTimeFormatter.format(LocalDateTime.now());
-    }
-
-
-    public void printListData(List<FoodMenu> list) {
-        System.out.println("-- 주문 상품 목록 --");
-        for (FoodMenu m : list) {
->>>>>>> 8b0704d98d402f56713a9e0e719dd32b4c69941e
-            System.out.println(m.getName() + "   | " + m.getPrice() + " | " + m.getDescription());
+        // 손민지 추가작성(0607) - 성민님 메모에 있던거 가져왔습니다. 나중에 조건대로 수정하면 될 것 같아요.
+        public static String setDate () {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd h:mm:ss");
+            return dateTimeFormatter.format(LocalDateTime.now());
         }
-        System.out.println();
-    }
-
-    private void orderComplete(List<FoodMenu> basket) {
-        int orderNumber = order.getOrderNumber();
-        List<FoodMenu> list = new ArrayList<>(basket);
-        // 손민지 추가작성(0607) - 관리자가 보는 리스트에 주문 내용 추가
-        manageList.add(new Order(orderNumber, list, order.getRequest(), setDate()));
 
 
-        // order클래스의 getOrderNumber()을 호출해 order()안에 있는 orderNumber의 숫자를 받아서 orderNumber변수에 초기화
-        System.out.println("주문이 완료되었습니다!");
-        System.out.println();
-        System.out.println("대기번호는 [ " + orderNumber + " ] 번 입니다.");
-        System.out.println("(3초 후 메뉴판으로 돌아갑니다.)");
-        System.out.println();
-
-        order.clearBasket(); // 주문이 완료되었으니 카트를 초기화 시켜줌
-        order.setOrderNumber(orderNumber + 1);
-        // 대기번호를 사용하였으니 setOrderNumber 메서드안에 orderNumber +1 을 넘겨주어서
-        // order클래스안의 orderNumber를 1증가 시켜줌
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-        showMainMenu();
-    }
-
-    public void orderCancel() {
-        if (order.getBasket().isEmpty()) {
+        public void printListData (List < FoodMenu > list) {
+            System.out.println("-- 주문 상품 목록 --");
+            for (FoodMenu m : list) {
+                System.out.println(m.getName() + "   | " + m.getPrice() + " | " + m.getDescription());
+            }
             System.out.println();
-            System.out.println("장바구니가 비어 있어 취소할 주문이 없습니다.");
-            System.out.println("3초 후 메뉴판으로 이동합니다. 감사합니다.");
+        }
+
+        private void orderComplete (List < FoodMenu > basket) {
+            int orderNumber = order.getOrderNumber();
+            List<FoodMenu> list = new ArrayList<>(basket);
+            // 손민지 추가작성(0607) - 관리자가 보는 리스트에 주문 내용 추가
+            manageList.add(new Order(orderNumber, list, order.getRequest(), setDate()));
+
+
+            // order클래스의 getOrderNumber()을 호출해 order()안에 있는 orderNumber의 숫자를 받아서 orderNumber변수에 초기화
+            System.out.println("주문이 완료되었습니다!");
+            System.out.println();
+            System.out.println("대기번호는 [ " + orderNumber + " ] 번 입니다.");
+            System.out.println("(3초 후 메뉴판으로 돌아갑니다.)");
+            System.out.println();
+
+            order.clearBasket(); // 주문이 완료되었으니 카트를 초기화 시켜줌
+            order.setOrderNumber(orderNumber + 1);
+            // 대기번호를 사용하였으니 setOrderNumber 메서드안에 orderNumber +1 을 넘겨주어서
+            // order클래스안의 orderNumber를 1증가 시켜줌
+
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
             showMainMenu();
-        }else{
-            System.out.println();
-            System.out.println("진행하던 주문을 취소하시겠습니까?");
-            System.out.println("1. 확인       2. 취소       ");
+        }
 
-            int cancelNum = sc.nextInt();
+        public void orderCancel () {
+            if (order.getBasket().isEmpty()) {
+                System.out.println();
+                System.out.println("장바구니가 비어 있어 취소할 주문이 없습니다.");
+                System.out.println("3초 후 메뉴판으로 이동합니다. 감사합니다.");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+                showMainMenu();
+            } else {
+                System.out.println();
+                System.out.println("진행하던 주문을 취소하시겠습니까?");
+                System.out.println("1. 확인       2. 취소       ");
+
+                int cancelNum = sc.nextInt();
+                sc.nextLine();
+
+                if (cancelNum == 1) {
+                    order.clearBasket();
+                    System.out.println("진행하던 주문이 취소되었습니다.");
+                    System.out.println();
+                } else if (cancelNum == 2) {
+                    System.out.println("주문을 유지하고 메뉴판으로 돌아갑니다.");
+                }
+                showMainMenu();
+            }
+        }
+
+        public void createFood () { // 상품생성 메서드
+            System.out.println("추가할 상품의 카테고리를 선택하세요.");
+            System.out.print("1. 버거    2. 아이스크림    3. 음료    4. 맥주 : ");
+            int categoryNum = sc.nextInt();
             sc.nextLine();
 
-            if (cancelNum == 1) {
-                order.clearBasket();
-                System.out.println("진행하던 주문이 취소되었습니다.");
-                System.out.println();
-            } else if (cancelNum == 2) {
-                System.out.println("주문을 유지하고 메뉴판으로 돌아갑니다.");
-            }
-            showMainMenu();
-        }
-    }
-
-    public void createFood(){ // 상품생성 메서드
-        System.out.println("추가할 상품의 카테고리를 선택하세요.");
-        System.out.print("1. 버거    2. 아이스크림    3. 음료    4. 맥주 : ");
-        int categoryNum = sc.nextInt();
-        sc.nextLine();
-
-        switch (categoryNum) {
-            case 1: // 버거선택
-                createBurger();
-
-                break;
-
-            case 2: // 아이스크림 메뉴
-                createFrozen();
-
-                break;
-
-            case 3: // 음료 메뉴
-                createDrinks();
-                break;
-
-            case 4: // 맥주 메뉴
-                createBeer();
-                break;
-            default:
-                System.out.println("1~4번의 숫자만 입력 가능합니다.");
-        }
-
-        showMainMenu();
-    }
-
-    // 조혜연 메서드 정리(0608)
-    public void createBurger (){
-        System.out.println("버거 카테고리를 선택하셨습니다.");
-        System.out.print("상품이름을 입력하세요 : ");
-        String burgerName = sc.nextLine();
-
-        System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
-        String burgerPrice = sc.nextLine();
-
-        System.out.print("설명을 입력하세요 : ");
-        String burgerDescription = sc.nextLine();
-
-        System.out.println("\n이름 : "+burgerName+"  가격 : "+burgerPrice+"  설명 : "+burgerDescription);
-        System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
-        System.out.println("1. 확인       2. 취소       ");
-        int bcheckNum = sc.nextInt();
-        sc.nextLine();
-
-        if(bcheckNum == 1){
-            System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
-            burgersMenu.add(new FoodMenu(burgerName, burgerPrice, burgerDescription));
-        }else if(bcheckNum == 2){
-            System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }else{
-            System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-    public void createFrozen (){
-        System.out.println("아이스크림 카테고리를 선택하셨습니다.");
-        System.out.print("상품이름을 입력하세요 : ");
-        String frozenName = sc.nextLine();
-
-        System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
-        String frozenPrice = sc.nextLine();
-
-        System.out.print("설명을 입력하세요 : ");
-        String frozenDescription = sc.nextLine();
-
-        System.out.println("\n이름 : "+frozenName+"  가격 : "+frozenPrice+"  설명 : "+frozenDescription);
-        System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
-        System.out.println("1. 확인       2. 취소       ");
-        int fcheckNum = sc.nextInt();
-        sc.nextLine();
-
-        if(fcheckNum == 1){
-            System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
-            frozenCustardMenu.add(new FoodMenu(frozenName, frozenPrice, frozenDescription));
-        }else if(fcheckNum == 2){
-            System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }else{
-            System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-    public void createDrinks (){
-        System.out.println("음료 카테고리를 선택하셨습니다.");
-        System.out.print("상품이름을 입력하세요 : ");
-        String drinksName = sc.nextLine();
-
-        System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
-        String drinksPrice = sc.nextLine();
-
-        System.out.print("설명을 입력하세요 : ");
-        String drinksDescription = sc.nextLine();
-
-        System.out.println("\n이름 : "+drinksName+"  가격 : "+drinksPrice+"  설명 : "+drinksDescription);
-        System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
-        System.out.println("1. 확인       2. 취소       ");
-        int dcheckNum = sc.nextInt();
-        sc.nextLine();
-
-        if(dcheckNum == 1){
-            System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
-            drinksMenu.add(new FoodMenu(drinksName, drinksPrice, drinksDescription));
-        }else if(dcheckNum == 2){
-            System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }else{
-            System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-    public void createBeer (){System.out.println("맥주 카테고리를 선택하셨습니다.");
-        System.out.print("상품이름을 입력하세요 : ");
-        String beerName = sc.nextLine();
-
-        System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
-        String beerPrice = sc.nextLine();
-
-        System.out.print("설명을 입력하세요 : ");
-        String beerDescription = sc.nextLine();
-
-        System.out.println("\n이름 : "+beerName+"  가격 : "+beerPrice+"  설명 : "+beerDescription);
-        System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
-        System.out.println("1. 확인       2. 취소       ");
-        int beercheckNum = sc.nextInt();
-        sc.nextLine();
-
-        if(beercheckNum == 1){
-            System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
-            beerMenu.add(new FoodMenu(beerName, beerPrice, beerDescription));
-        }else if(beercheckNum == 2){
-            System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }else{
-            System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-
-    public void deleteFood() { // 상품삭제 메서드
-        System.out.println("삭제할 상품의 카테고리를 선택하세요");
-        System.out.print("1. 버거    2. 아이스크림    3. 음료    4. 맥주 : ");
-        int categoryNum = sc.nextInt();
-        sc.nextLine();
-
-        switch (categoryNum) {
-            case 1: // 버거 선택
-                deleteBurger();
-                break;
-
-            case 2: // 아이스크림 선택
-                deleteFC();
-                break;
-
-            case 3: // 음료 선택
-                deleteDrinks();
-                break;
-
-            case 4: // 맥주 선택
-                deleteBeer();
-                break;
-
-            default:
-                System.out.println("1~4번의 숫자만 입력 가능합니다.");
-        }
-    }
-
-    public void deleteBurger(){
-        System.out.println("\n버거 카테고리를 선택하셨습니다.\n");
-
-        for (int i = 0; i < burgersMenu.size(); i++) {
-            FoodMenu menu = burgersMenu.get(i);
-            System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
-        }
-
-        System.out.print("\n삭제할 버거의 이름을 입력하세요 : ");
-        String burgerName = sc.nextLine();
-
-        boolean burgersF = false; // 버거가 존재하는지 확인하기 위한 boolean형 변수
-        for (int i = 0; i < burgersMenu.size(); i++) {
-            FoodMenu burgers = burgersMenu.get(i);
-            if (burgers.getName().equals(burgerName)) {
-                System.out.print(burgers.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
-                int burgersCheck = sc.nextInt();
-                sc.nextLine();
-                if (burgersCheck == 1) {
-                    burgersMenu.remove(i);
-                    burgersF = true;
+            switch (categoryNum) {
+                case 1: // 버거선택
+                    createBurger();
                     break;
 
-                } else if (burgersCheck == 2) {
-                    System.out.println("삭제를 취소합니다.");
-                    System.out.println("메뉴판으로 이동합니다.\n");
-                    showMainMenu();
-                }
-
-            }
-        }
-
-        if (burgersF == true) { // 버거 제거시
-            System.out.println(burgerName + " 이 메뉴에서 삭제되었습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        } else if (burgersF == false) { // 버거이름이 존재하지 않을때
-            System.out.println("존재하지 않는 버거이름을 입력하였습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-    public void deleteFC(){
-        System.out.println("\n아이스크림 카테고리를 선택하셨습니다.\n");
-
-        for (int i = 0; i < frozenCustardMenu.size(); i++) {
-            FoodMenu menu = frozenCustardMenu.get(i);
-            System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
-        }
-
-        System.out.print("\n삭제할 아이스크림의 이름을 입력하세요 : ");
-        String frozenCustardName = sc.nextLine();
-
-        boolean frozenCustardF = false;
-        for (int i = 0; i < frozenCustardMenu.size(); i++) {
-            FoodMenu frozenCustard = frozenCustardMenu.get(i);
-            if (frozenCustard.getName().equals(frozenCustardName)) {
-                System.out.print(frozenCustard.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
-                int frozenCustardCheck = sc.nextInt();
-                sc.nextLine();
-                if (frozenCustardCheck == 1) {
-                    frozenCustardMenu.remove(i);
-                    frozenCustardF = true;
+                case 2: // 아이스크림 메뉴
+                    createFrozen();
                     break;
 
-                } else if (frozenCustardCheck == 2) {
-                    System.out.println("삭제를 취소합니다.");
-                    System.out.println("메뉴판으로 이동합니다.\n");
-                    showMainMenu();
-                }
-            }
-        }
-        if (frozenCustardF == true) {
-            System.out.println(frozenCustardName + " 이 메뉴에서 삭제되었습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        } else if (frozenCustardF == false) {
-            System.out.println("존재하지 않는 아이스크림 이름을 입력하였습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-    public void deleteDrinks(){System.out.println("\n음료 카테고리를 선택하셨습니다.\n");
-
-        for (int i = 0; i < drinksMenu.size(); i++) {
-            FoodMenu menu = drinksMenu.get(i);
-            System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
-        }
-
-        System.out.print("\n삭제할 음료의 이름을 입력하세요 : ");
-        String drinksName = sc.nextLine();
-
-        boolean drinksF = false;
-        for (int i = 0; i < drinksMenu.size(); i++) {
-            FoodMenu drinks = drinksMenu.get(i);
-            if (drinks.getName().equals(drinksName)) {
-                System.out.print(drinks.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
-                int drinksCheck = sc.nextInt();
-                sc.nextLine();
-                if (drinksCheck == 1) {
-                    drinksMenu.remove(i);
-                    drinksF = true;
+                case 3: // 음료 메뉴
+                    createDrinks();
                     break;
 
-                } else if (drinksCheck == 2) {
-                    System.out.println("삭제를 취소합니다.");
-                    System.out.println("메뉴판으로 이동합니다.\n");
-                    showMainMenu();
-                }
+                case 4: // 맥주 메뉴
+                    createBeer();
+                    break;
+                default:
+                    System.out.println("1~4번의 숫자만 입력 가능합니다.");
+            }
+
+            showMainMenu();
+        }
+
+        // 조혜연 메서드 정리(0608)
+        public void createBurger () {
+            System.out.println("버거 카테고리를 선택하셨습니다.");
+            System.out.print("상품이름을 입력하세요 : ");
+            String burgerName = sc.nextLine();
+
+            System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
+            String burgerPrice = sc.nextLine();
+
+            System.out.print("설명을 입력하세요 : ");
+            String burgerDescription = sc.nextLine();
+
+            System.out.println("\n이름 : " + burgerName + "  가격 : " + burgerPrice + "  설명 : " + burgerDescription);
+            System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
+            System.out.println("1. 확인       2. 취소       ");
+            int bcheckNum = sc.nextInt();
+            sc.nextLine();
+
+            if (bcheckNum == 1) {
+                System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
+                burgersMenu.add(new FoodMenu(burgerName, burgerPrice, burgerDescription));
+            } else if (bcheckNum == 2) {
+                System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else {
+                System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+        public void createFrozen () {
+            System.out.println("아이스크림 카테고리를 선택하셨습니다.");
+            System.out.print("상품이름을 입력하세요 : ");
+            String frozenName = sc.nextLine();
+
+            System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
+            String frozenPrice = sc.nextLine();
+
+            System.out.print("설명을 입력하세요 : ");
+            String frozenDescription = sc.nextLine();
+
+            System.out.println("\n이름 : " + frozenName + "  가격 : " + frozenPrice + "  설명 : " + frozenDescription);
+            System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
+            System.out.println("1. 확인       2. 취소       ");
+            int fcheckNum = sc.nextInt();
+            sc.nextLine();
+
+            if (fcheckNum == 1) {
+                System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
+                frozenCustardMenu.add(new FoodMenu(frozenName, frozenPrice, frozenDescription));
+            } else if (fcheckNum == 2) {
+                System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else {
+                System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+        public void createDrinks () {
+            System.out.println("음료 카테고리를 선택하셨습니다.");
+            System.out.print("상품이름을 입력하세요 : ");
+            String drinksName = sc.nextLine();
+
+            System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
+            String drinksPrice = sc.nextLine();
+
+            System.out.print("설명을 입력하세요 : ");
+            String drinksDescription = sc.nextLine();
+
+            System.out.println("\n이름 : " + drinksName + "  가격 : " + drinksPrice + "  설명 : " + drinksDescription);
+            System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
+            System.out.println("1. 확인       2. 취소       ");
+            int dcheckNum = sc.nextInt();
+            sc.nextLine();
+
+            if (dcheckNum == 1) {
+                System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
+                drinksMenu.add(new FoodMenu(drinksName, drinksPrice, drinksDescription));
+            } else if (dcheckNum == 2) {
+                System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else {
+                System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+        public void createBeer () {
+            System.out.println("맥주 카테고리를 선택하셨습니다.");
+            System.out.print("상품이름을 입력하세요 : ");
+            String beerName = sc.nextLine();
+
+            System.out.print("상품가격을 입력하세요 (단위 : W x.x) : ");
+            String beerPrice = sc.nextLine();
+
+            System.out.print("설명을 입력하세요 : ");
+            String beerDescription = sc.nextLine();
+
+            System.out.println("\n이름 : " + beerName + "  가격 : " + beerPrice + "  설명 : " + beerDescription);
+            System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
+            System.out.println("1. 확인       2. 취소       ");
+            int beercheckNum = sc.nextInt();
+            sc.nextLine();
+
+            if (beercheckNum == 1) {
+                System.out.println("메뉴추가를 완료하였습니다. 메뉴판으로 돌아갑니다.\n");
+                beerMenu.add(new FoodMenu(beerName, beerPrice, beerDescription));
+            } else if (beercheckNum == 2) {
+                System.out.println("메뉴추가를 취소하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else {
+                System.out.println("번호를 잘못 입력하셨습니다. 메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
             }
         }
 
-        if (drinksF == true) {
-            System.out.println(drinksName + " 이 메뉴에서 삭제되었습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        } else if (drinksF == false) {
-            System.out.println("존재하지 않는 음료 이름을 입력하였습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-    public void deleteBeer(){System.out.println("\n맥주 카테고리를 선택하셨습니다.\n");
+        public void deleteFood () { // 상품삭제 메서드
+            System.out.println("삭제할 상품의 카테고리를 선택하세요");
+            System.out.print("1. 버거    2. 아이스크림    3. 음료    4. 맥주 : ");
+            int categoryNum = sc.nextInt();
+            sc.nextLine();
 
-        for (int i = 0; i < beerMenu.size(); i++) {
-            FoodMenu menu = beerMenu.get(i);
-            System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
-        }
-
-        System.out.print("\n삭제할 맥주의 이름을 입력하세요 : ");
-        String beerName = sc.nextLine();
-
-        boolean beerF = false;
-        for (int i = 0; i < beerMenu.size(); i++) {
-            FoodMenu beer = beerMenu.get(i);
-            if (beer.getName().equals(beerName)) {
-                System.out.print(beer.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
-                int beerCheck = sc.nextInt();
-                sc.nextLine();
-                if (beerCheck == 1) {
-                    beerMenu.remove(i);
-                    beerF = true;
+            switch (categoryNum) {
+                case 1: // 버거 선택
+                    deleteBurger();
                     break;
 
-                } else if (beerCheck == 2) {
-                    System.out.println("삭제를 취소합니다.");
-                    System.out.println("메뉴판으로 이동합니다.\n");
-                    showMainMenu();
-                }
-            }
-        }
-
-        if (beerF == true) {
-            System.out.println(beerName + " 이 메뉴에서 삭제되었습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        } else if (beerF == false) {
-            System.out.println("존재하지 않는 맥주 이름을 입력하였습니다.");
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
-        }
-    }
-
-
-    // 손민지 추가작성(0607) - 주문 건 별로 출력하도록 변경
-    public void waitMgmt() { // 대기주문관리 메서드
-//        List<FoodMenu> waiting = mainMenu.getWaitingOrders();
-        System.out.println("대기주문관리를 선택하셨습니다.");
-        System.out.println("대기중인 주문입니다.\n");
-
-        // 관리자 리스트에 있는 주문 기록 출력
-        for (Order o : manageList) {
-            // 완료 x 주문만 골라 출력
-            if (!o.finished) {
-                System.out.println("=============================================");
-                System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
-                printListData(o.getbasket());
-                System.out.println("-- total : W " + o.totalPrice());
-                System.out.println("-- 요청사항 : " + o.getRequest());
-                System.out.println("-- 주문 일시 : " + o.orderedTime);
-            }
-        }
-
-        System.out.print("\n수행할 기능을 입력하세요 (1. 주문완료처리       2. 주문거절) : ");
-        int check = sc.nextInt();
-        sc.nextLine();
-
-        if (check == 1) {
-            System.out.println("완료처리 할 주문 번호를 입력해주세요. : ");
-            int orderNum = sc.nextInt();
-
-            for (Order o : manageList) {
-                if (o.getOrderNumber() == orderNum) {
-                    // 주문번호가 orderNum인 주문이 완료 전이라면
-                    if (!o.finished) {
-                        o.finished = true;
-                        break;
-                    } else {
-                        System.out.println("이미 완료된 주문 번호입니다.");
-                        break;
-                    }
-                }
-            }
-        } else if (check == 2) {
-            System.out.println("거절할 주문 번호를 입력해주세요. : ");
-            int orderNum = sc.nextInt();
-
-            System.out.println();
-            for (Order o : manageList) {
-                if (o.getOrderNumber() == orderNum) {
-                    manageList.remove(o);
+                case 2: // 아이스크림 선택
+                    deleteFC();
                     break;
-                }
+
+                case 3: // 음료 선택
+                    deleteDrinks();
+                    break;
+
+                case 4: // 맥주 선택
+                    deleteBeer();
+                    break;
+
+                default:
+                    System.out.println("1~4번의 숫자만 입력 가능합니다.");
+            }
+        }
+
+        public void deleteBurger () {
+            System.out.println("\n버거 카테고리를 선택하셨습니다.\n");
+
+            for (int i = 0; i < burgersMenu.size(); i++) {
+                FoodMenu menu = burgersMenu.get(i);
+                System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
             }
 
-        }
+            System.out.print("\n삭제할 버거의 이름을 입력하세요 : ");
+            String burgerName = sc.nextLine();
 
-        // for(int i=0; i<waitingOrders.size(); i++){
-        //     FoodMenu wait = waitingOrders.get(i);
-        //     System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
-        // }
-    }
-
-    public void finishedMgtm() { // 완료주문관리 메서드
-        System.out.println("완료주문관리를 선택하셨습니다.");
-        System.out.println("완료된 주문입니다.\n");
-
-        for (int i = 0; i < finishedOrders.size(); i++) {
-            FoodMenu finished = finishedOrders.get(i);
-            System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
-        }
-
-        System.out.print("\n수행할 기능을 입력하세요 (1. 완료처리내역 삭제       2. 메뉴판으로 돌아가기) : ");
-        int check = sc.nextInt();
-        sc.nextLine();
-
-        if (check == 1) {
-            System.out.print("기록에서 삭제처리할 상품명을 입력하세요 : ");
-            String remove = sc.nextLine();
-
-            boolean name = false; // 상품이 존재하는지 확인하기 위한 boolean형 변수
-            for (int i = 0; i < finishedOrders.size(); i++) {
-                FoodMenu finished = finishedOrders.get(i);
-                if (finished.getName().equals(remove)) {
-                    System.out.print(finished.getName() + " 를 완료기록에서 삭제처리 하시겠습니까? (1. 확인        2. 취소) : ");
-                    int ok = sc.nextInt();
+            boolean burgersF = false; // 버거가 존재하는지 확인하기 위한 boolean형 변수
+            for (int i = 0; i < burgersMenu.size(); i++) {
+                FoodMenu burgers = burgersMenu.get(i);
+                if (burgers.getName().equals(burgerName)) {
+                    System.out.print(burgers.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
+                    int burgersCheck = sc.nextInt();
                     sc.nextLine();
-                    if (ok == 1) {
-                        finishedOrders.remove(i);
-                        name = true;
+                    if (burgersCheck == 1) {
+                        burgersMenu.remove(i);
+                        burgersF = true;
                         break;
 
-                    } else if (ok == 2) {
-                        System.out.println("삭제처리를 취소합니다.");
+                    } else if (burgersCheck == 2) {
+                        System.out.println("삭제를 취소합니다.");
                         System.out.println("메뉴판으로 이동합니다.\n");
                         showMainMenu();
                     }
@@ -911,24 +678,254 @@ public class MainMenu {
                 }
             }
 
-            if (name == true) { // 상품 완료 처리시
-                System.out.println(remove + " 메뉴가 삭제처리되었습니다.");
+            if (burgersF == true) { // 버거 제거시
+                System.out.println(burgerName + " 이 메뉴에서 삭제되었습니다.");
                 System.out.println("메뉴판으로 돌아갑니다.\n");
                 showMainMenu();
+            } else if (burgersF == false) { // 버거이름이 존재하지 않을때
+                System.out.println("존재하지 않는 버거이름을 입력하였습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+        public void deleteFC () {
+            System.out.println("\n아이스크림 카테고리를 선택하셨습니다.\n");
 
-            } else if (name == false) { // 상품이름이 존재하지 않을때
-                System.out.println("존재하지 않는 상품이름을 입력하였습니다.");
+            for (int i = 0; i < frozenCustardMenu.size(); i++) {
+                FoodMenu menu = frozenCustardMenu.get(i);
+                System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
+            }
+
+            System.out.print("\n삭제할 아이스크림의 이름을 입력하세요 : ");
+            String frozenCustardName = sc.nextLine();
+
+            boolean frozenCustardF = false;
+            for (int i = 0; i < frozenCustardMenu.size(); i++) {
+                FoodMenu frozenCustard = frozenCustardMenu.get(i);
+                if (frozenCustard.getName().equals(frozenCustardName)) {
+                    System.out.print(frozenCustard.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
+                    int frozenCustardCheck = sc.nextInt();
+                    sc.nextLine();
+                    if (frozenCustardCheck == 1) {
+                        frozenCustardMenu.remove(i);
+                        frozenCustardF = true;
+                        break;
+
+                    } else if (frozenCustardCheck == 2) {
+                        System.out.println("삭제를 취소합니다.");
+                        System.out.println("메뉴판으로 이동합니다.\n");
+                        showMainMenu();
+                    }
+                }
+            }
+            if (frozenCustardF == true) {
+                System.out.println(frozenCustardName + " 이 메뉴에서 삭제되었습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else if (frozenCustardF == false) {
+                System.out.println("존재하지 않는 아이스크림 이름을 입력하였습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+        public void deleteDrinks () {
+            System.out.println("\n음료 카테고리를 선택하셨습니다.\n");
+
+            for (int i = 0; i < drinksMenu.size(); i++) {
+                FoodMenu menu = drinksMenu.get(i);
+                System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
+            }
+
+            System.out.print("\n삭제할 음료의 이름을 입력하세요 : ");
+            String drinksName = sc.nextLine();
+
+            boolean drinksF = false;
+            for (int i = 0; i < drinksMenu.size(); i++) {
+                FoodMenu drinks = drinksMenu.get(i);
+                if (drinks.getName().equals(drinksName)) {
+                    System.out.print(drinks.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
+                    int drinksCheck = sc.nextInt();
+                    sc.nextLine();
+                    if (drinksCheck == 1) {
+                        drinksMenu.remove(i);
+                        drinksF = true;
+                        break;
+
+                    } else if (drinksCheck == 2) {
+                        System.out.println("삭제를 취소합니다.");
+                        System.out.println("메뉴판으로 이동합니다.\n");
+                        showMainMenu();
+                    }
+                }
+            }
+
+            if (drinksF == true) {
+                System.out.println(drinksName + " 이 메뉴에서 삭제되었습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else if (drinksF == false) {
+                System.out.println("존재하지 않는 음료 이름을 입력하였습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+        public void deleteBeer () {
+            System.out.println("\n맥주 카테고리를 선택하셨습니다.\n");
+
+            for (int i = 0; i < beerMenu.size(); i++) {
+                FoodMenu menu = beerMenu.get(i);
+                System.out.println((i + 1) + ". " + menu.getName() + "   | " + menu.getPrice() + " | " + menu.getDescription());
+            }
+
+            System.out.print("\n삭제할 맥주의 이름을 입력하세요 : ");
+            String beerName = sc.nextLine();
+
+            boolean beerF = false;
+            for (int i = 0; i < beerMenu.size(); i++) {
+                FoodMenu beer = beerMenu.get(i);
+                if (beer.getName().equals(beerName)) {
+                    System.out.print(beer.getName() + " 를 메뉴에서 삭제시키겠습니까? (1. 삭제        2. 취소) : ");
+                    int beerCheck = sc.nextInt();
+                    sc.nextLine();
+                    if (beerCheck == 1) {
+                        beerMenu.remove(i);
+                        beerF = true;
+                        break;
+
+                    } else if (beerCheck == 2) {
+                        System.out.println("삭제를 취소합니다.");
+                        System.out.println("메뉴판으로 이동합니다.\n");
+                        showMainMenu();
+                    }
+                }
+            }
+
+            if (beerF == true) {
+                System.out.println(beerName + " 이 메뉴에서 삭제되었습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            } else if (beerF == false) {
+                System.out.println("존재하지 않는 맥주 이름을 입력하였습니다.");
+                System.out.println("메뉴판으로 돌아갑니다.\n");
+                showMainMenu();
+            }
+        }
+
+
+        // 손민지 추가작성(0607) - 주문 건 별로 출력하도록 변경
+        public void waitMgmt () { // 대기주문관리 메서드
+//        List<FoodMenu> waiting = mainMenu.getWaitingOrders();
+            System.out.println("대기주문관리를 선택하셨습니다.");
+            System.out.println("대기중인 주문입니다.\n");
+
+            // 관리자 리스트에 있는 주문 기록 출력
+            for (Order o : manageList) {
+                // 완료 x 주문만 골라 출력
+                if (!o.finished) {
+                    System.out.println("=============================================");
+                    System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                    printListData(o.getbasket());
+                    System.out.println("-- total : W " + o.totalPrice());
+                    System.out.println("-- 요청사항 : " + o.getRequest());
+                    System.out.println("-- 주문 일시 : " + o.orderedTime);
+                }
+            }
+
+            System.out.print("\n수행할 기능을 입력하세요 (1. 주문완료처리       2. 주문거절) : ");
+            int check = sc.nextInt();
+            sc.nextLine();
+
+            if (check == 1) {
+                System.out.println("완료처리 할 주문 번호를 입력해주세요. : ");
+                int orderNum = sc.nextInt();
+
+                for (Order o : manageList) {
+                    if (o.getOrderNumber() == orderNum) {
+                        // 주문번호가 orderNum인 주문이 완료 전이라면
+                        if (!o.finished) {
+                            o.finished = true;
+                            break;
+                        } else {
+                            System.out.println("이미 완료된 주문 번호입니다.");
+                            break;
+                        }
+                    }
+                }
+            } else if (check == 2) {
+                System.out.println("거절할 주문 번호를 입력해주세요. : ");
+                int orderNum = sc.nextInt();
+
+                System.out.println();
+                for (Order o : manageList) {
+                    if (o.getOrderNumber() == orderNum) {
+                        manageList.remove(o);
+                        break;
+                    }
+                }
+
+            }
+
+            // for(int i=0; i<waitingOrders.size(); i++){
+            //     FoodMenu wait = waitingOrders.get(i);
+            //     System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+            // }
+        }
+
+        public void finishedMgtm () { // 완료주문관리 메서드
+            System.out.println("완료주문관리를 선택하셨습니다.");
+            System.out.println("완료된 주문입니다.\n");
+
+            for (int i = 0; i < finishedOrders.size(); i++) {
+                FoodMenu finished = finishedOrders.get(i);
+                System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+            }
+
+            System.out.print("\n수행할 기능을 입력하세요 (1. 완료처리내역 삭제       2. 메뉴판으로 돌아가기) : ");
+            int check = sc.nextInt();
+            sc.nextLine();
+
+            if (check == 1) {
+                System.out.print("기록에서 삭제처리할 상품명을 입력하세요 : ");
+                String remove = sc.nextLine();
+
+                boolean name = false; // 상품이 존재하는지 확인하기 위한 boolean형 변수
+                for (int i = 0; i < finishedOrders.size(); i++) {
+                    FoodMenu finished = finishedOrders.get(i);
+                    if (finished.getName().equals(remove)) {
+                        System.out.print(finished.getName() + " 를 완료기록에서 삭제처리 하시겠습니까? (1. 확인        2. 취소) : ");
+                        int ok = sc.nextInt();
+                        sc.nextLine();
+                        if (ok == 1) {
+                            finishedOrders.remove(i);
+                            name = true;
+                            break;
+
+                        } else if (ok == 2) {
+                            System.out.println("삭제처리를 취소합니다.");
+                            System.out.println("메뉴판으로 이동합니다.\n");
+                            showMainMenu();
+                        }
+
+                    }
+                }
+
+                if (name == true) { // 상품 완료 처리시
+                    System.out.println(remove + " 메뉴가 삭제처리되었습니다.");
+                    System.out.println("메뉴판으로 돌아갑니다.\n");
+                    showMainMenu();
+
+                } else if (name == false) { // 상품이름이 존재하지 않을때
+                    System.out.println("존재하지 않는 상품이름을 입력하였습니다.");
+                    System.out.println("메뉴판으로 돌아갑니다.\n");
+                    showMainMenu();
+                }
+
+            } else if (check == 2) {
                 System.out.println("메뉴판으로 돌아갑니다.\n");
                 showMainMenu();
             }
 
-        } else if (check == 2) {
-            System.out.println("메뉴판으로 돌아갑니다.\n");
-            showMainMenu();
         }
 
     }
-
-
-
 }
