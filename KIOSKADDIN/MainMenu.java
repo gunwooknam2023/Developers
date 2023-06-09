@@ -510,32 +510,76 @@ public class MainMenu {
         showMainMenu(); // 예외상황발생없이 위의 Thread.sleep(3000)이 try되면 메인메뉴로 돌아감.
     }
 
-    public void OrderStatus() { //주문현황
+ public void OrderStatus() { //주문현황
+        
+        // 소원님 코드
+//        System.out.println();
+//        System.out.println("[ 최근에 주문완료된 목록 ]");
+//
+//        if (finishedOrders.size() >= 4) {
+//            System.out.println("4개 이상의 주문이 완료되었습니다.");
+//        } else if (finishedOrders.size() == 0) {
+//            System.out.print("주문완료된 상품이 없습니다.");
+//        } else {
+//            for (int i = 0; i < finishedOrders.size(); i++) {
+//                FoodMenu finished = finishedOrders.get(i);
+//                System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+//            }
+//        }
+//        System.out.println();
+//        System.out.println("-------------------------");
+//        System.out.println("[ 대기 중인 주문목록 ]");
+//        if (waitingOrders.size() == 0) {
+//            System.out.print("대기 중인 상품이 없습니다.");
+//        } else {
+//            for (int i = 0; i < waitingOrders.size(); i++) {
+//                FoodMenu wait = waitingOrders.get(i);
+//                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+//            }
+//        }
         System.out.println();
-        System.out.println("[ 최근에 주문완료된 목록 ]");
+        System.out.println("[ 최근에 완료된 주문목록 ]");
 
-        if (finishedOrders.size() >= 4) {
-            System.out.println("4개 이상의 주문이 완료되었습니다.");
-        } else if (finishedOrders.size() == 0) {
-            System.out.print("주문완료된 상품이 없습니다.");
-        } else {
-            for (int i = 0; i < finishedOrders.size(); i++) {
-                FoodMenu finished = finishedOrders.get(i);
-                System.out.println(finished.getName() + "   | " + finished.getPrice() + " | " + finished.getDescription());
+        int i = 0;
+        for(Order o : manageList){
+            if(o.finished){
+                System.out.println("=============================================");
+                System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                printListData(o.getBasket());
+                System.out.println("-- 주문 일시 : " + o.orderedTime);
+                System.out.println("-- 완료 일시 : " + o.finishedTime);
+                i++;
+            }
+            if(i>2){
+                break;
             }
         }
+        if(i==0){
+            System.out.print("주문 완료된 상품이 없습니다.");
+        }
+
         System.out.println();
         System.out.println("-------------------------");
-        System.out.println("[ 대기 중인 주문목록 ]");
-        if (waitingOrders.size() == 0) {
-            System.out.print("대기 중인 상품이 없습니다.");
-        } else {
-            for (int i = 0; i < waitingOrders.size(); i++) {
-                FoodMenu wait = waitingOrders.get(i);
-                System.out.println(wait.getName() + "   | " + wait.getPrice() + " | " + wait.getDescription());
+        System.out.println("[ 대기 중인 주문 목록 ]");
+
+        i=0;
+        for(Order o : manageList){
+            if(!o.finished){
+                System.out.println("=============================================");
+                System.out.println("-- 주문 번호 : " + o.getOrderNumber() + " --");
+                printListData(o.getBasket());
+                System.out.println("-- 주문 일시 : " + o.orderedTime);
+                i++;
+            }
+            if(i>2){
+                break;
             }
         }
-        System.out.println();
+        if(i==0){
+            System.out.print("대기 중인 상품이 없습니다.");
+        }
+
+        System.out.println("메인 메뉴로 돌아갑니다.");
         showMainMenu();
     }
 
