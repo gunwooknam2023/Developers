@@ -6,12 +6,14 @@ import java.util.List;
 public class Order {
     private List<FoodMenu> basket; // FoodMenu 리스트 형식으로 사용할 basket 생성
     private int orderNumber; // 주문대기번호
-
-    String request; // 요청사항
+    private String request; // 요청사항
+//    private String orderedTime; // 주문 시각
+//    private String finishedTime; // 주문 완료 시각
+    boolean finished = false;
     String orderedTime; // 주문 시각
     String finishedTime; // 주문 완료 시각
 
-    boolean finished = false;
+//    boolean finished = false;
 
     public Order() {
         basket = new ArrayList<>(); // 장바구니 어레이리스트 생성
@@ -20,42 +22,32 @@ public class Order {
 
     // 손민지 추가작성(0607)
     public Order(int orderNumber, List<FoodMenu> basket, String request, String orderedTime) {
-        this.orderNumber =orderNumber;
+        this.orderNumber = orderNumber;
         this.basket = basket;
         this.request = request;
         this.orderedTime = orderedTime;
     }
 
 
-    public List<FoodMenu> getbasket() { // 장바구니 메뉴 리턴
+    public List<FoodMenu> getBasket() { // 장바구니 메뉴 리턴
         return basket;
     }
-    //
 
-    public int getOrderNumber() {
+    public int getOrderNumber() { // 현재 orderNumber를 리턴해줌
         return orderNumber;
     }
-    // 현재 orderNumber를 리턴해줌
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(int orderNumber) { // OrderNumber을 넘겨받아 Order()에서 선언한 orderNumber에 넘겨받은 orderNumber으로 초기화
         this.orderNumber = orderNumber;
     }
-    // OrderNumber을 넘겨받아 Order()에서 선언한 orderNumber에 넘겨받은 orderNumber으로 초기화
 
-    public void addbasket(FoodMenu menu) {
+    public void addToBasket(FoodMenu menu) { // 장바구니에 들어온 FoodMenu 형식의 menu를 받아서 안의 정보를 basket에 추가해줌
         basket.add(menu);
     }
-    // 장바구니에 들어온 FoodMenu 형식의 menu를 받아서 안의 정보를 basket에 추가해줌
 
-
-    public void Clearbasket() {
+    public void clearBasket() { // 장바구니 초기화
         basket.clear();
     }
-
-    public String getRequest(){
-        return request;
-    }
-    // 장바구니 초기화
 
     public double totalPrice() { // 가격계산
         double total = 0.0; // 처음 total의 가격 0원으로 시작
@@ -73,7 +65,13 @@ public class Order {
         }
         return total; // 처리된 total값 리턴
     }
+
+    // 조혜연 추가 작성(0607)
+    public String getRequest() {
+        return request;
+    }
+
+    public void setRequest(String request) {
+        this.request = request;
+    }
 }
-
-
-
