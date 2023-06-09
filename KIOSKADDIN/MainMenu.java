@@ -1008,6 +1008,7 @@ public class MainMenu {
                     break;
                 } else if (o.getOrderNumber() != orderNum) {
                     System.out.println("완료내역에 존재하지 않는 주문 번호입니다.");
+                    
                 }
 
 
